@@ -1,0 +1,116 @@
+@import url('./global/reset.css');
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,400,600,700&display=swap');
+
+:root {
+	font-size: 16px;
+	--color-primary: #e53f00;
+	--color-primary-text: #212121;
+	--color-secondary: #fcb913;
+	--color-tertiary: #79acb9;
+	--color-success: #18a957;
+	--color-warning: #ffbb38;
+	--color-error: #df1642;
+	--color-grey-light: #fcfcfc;
+	--color-grey-semi: #e6e6e6;
+	--color-grey: #939393;
+	--color-grey-dark: #666;
+	--color-dark: #232323;
+
+	--sans: 'Poppins', futura-pt, sans-serif, -apple-system, blinkmacsystemfont,
+		'Segoe UI', roboto, oxygen-sans, ubuntu, cantarell, 'Helvetica Neue',
+		sans-serif;
+
+	--serif: minion-pro-display, system-ui, -apple-system, blinkmacsystemfont,
+		segoe ui, roboto, helvetica, arial, sans-serif, apple color emoji,
+		segoe ui emoji, segoe ui symbol;
+
+	--font-weight-display: 700;
+
+	--font-size-xxl: 3rem; /* 48px */
+	--font-size-xl: 2.25rem; /* 36px */
+	--font-size-lg: 1.75rem; /* 28px */
+	--font-size-md: 1.125rem; /* 18px */
+	--font-size-sm: 1rem; /* 16px */
+	--font-size-xs: 0.875rem; /* 14px */
+
+	--line-height: 1.5;
+	--max-width-lg: 1140px;
+	--max-width-md: 720px;
+	--max-width-sm: 540px;
+
+	--card-shadow: 0 0 1px 0 rgba(48, 49, 51, 0.05),
+		0 16px 24px 0 rgba(48, 49, 51, 0.1);
+}
+
+/*
+ * Media Query Objects
+ * Usage: @media ( --bp-small ) { [all the styles] }
+ */
+@custom-media --bp-small (min-width: 560px);
+@custom-media --bp-medium (min-width: 768px);
+@custom-media --bp-xmedium (min-width: 900px);
+@custom-media --bp-large (min-width: 1024px);
+@custom-media --bp-xlarge (min-width: 1250px);
+
+body {
+	color: var(--color-primary-text);
+	font-family: var(--sans);
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	color: var(--color-primary);
+	font-family: var(--sans);
+	font-size: var(--font-size-xxl);
+	font-weight: var(--font-weight-display);
+
+	& a {
+		color: var(--color-secondary);
+	}
+}
+
+h2 {
+	color: var(--color-primary-text);
+	font-family: var(--sans);
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-display);
+	line-height: 1;
+	margin: 0;
+
+	& a {
+		color: var(--color-secondary);
+	}
+}
+
+h3 {
+	font-family: var(--sans);
+	font-size: 18px;
+	font-weight: bold;
+}
+
+p {
+	font-family: var(--serif);
+	font-size: 1.125rem;
+
+	@nest > #footer & {
+		font-family: var(--sans);
+	}
+}
+
+a {
+	color: var(--color-primary-text);
+	font-family: var(--sans);
+
+	&:hover {
+		color: var(--color-primary);
+	}
+
+	@nest .content-wrapper & {
+		color: var(--color-primary);
+
+		&:hover {
+			tex-decoration: underline;
+		}
+	}
+}
