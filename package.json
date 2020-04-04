@@ -4,10 +4,10 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack",
 		"dev": "concurrently \"webpack --mode development --watch\" \"nodemon server.js\"",
-		"lint": "eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|css)\"",
+		"lint": "eslint --ignore-path .gitignore .",
 		"validate": "npm run format && npm run lint &&npm run build"
 	},
 	"author": "",
