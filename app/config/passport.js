@@ -1,22 +1,16 @@
-const bCrypt = require('bcrypt-nodejs')
-
 module.exports = function (passport, user) {
 	const User = user
-	const LocalStrategy = require('passport-local').Strategy
+	const LocalStrategy = require("passport-local").Strategy
 
 	passport.use(
-		'local-signup',
+		"local-signup",
 		new LocalStrategy(
 			{
-				usernameField: 'email',
-				passwordField: 'password',
+				usernameField: "email",
+				passwordField: "password",
 				passReqToCallback: true, // allows us to pass back the entire request to the callback
 			},
 			function (req, email, password, done) {
-				const generateHash = function (password) {
-					return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
-				}
-
 				User.findOne({
 					where: {
 						email: email,
@@ -24,15 +18,13 @@ module.exports = function (passport, user) {
 				}).then(function (user) {
 					if (user) {
 						return done(null, false, {
-							message: 'That email is already taken',
+							message: "That email is already taken",
 						})
 					} else {
-						var userPassword = generateHash(password)
-
 						var data = {
 							email: email,
 
-							password: userPassword,
+							password: password,
 
 							firstName: req.body.firstname,
 
@@ -54,31 +46,29 @@ module.exports = function (passport, user) {
 		),
 
 		passport.use(
-			'local-signin',
+			"local-signin",
 			new LocalStrategy(
 				{
 					// by default, local strategy uses username and password, we will override with email
 
-					usernameField: 'email',
+					usernameField: "email",
 
-					passwordField: 'password',
+					passwordField: "password",
 					// allows us to pass back the entire request to the callback
 				},
 				function (username, password, done) {
-					const isValidPassword = function (userpass, password) {
-						return bCrypt.compareSync(password, userpass)
-					}
 					User.findOne({
 						where: {
 							email: username,
 						},
 					})
 						.then(user => {
+							console.log(password)
 							if (!user) {
-								return done(null, false, { message: 'Incorrect username.' })
+								return done(null, false, { message: "Incorrect username." })
 							}
-							if (!isValidPassword(user.password, password)) {
-								return done(null, false, { message: 'Incorrect password.' })
+							if (!user.isValidPassword(password)) {
+								return done(null, false, { message: "Incorrect password." })
 							}
 							return done(null, user)
 						})
